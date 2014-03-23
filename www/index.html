@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        
+        <link rel="stylesheet" type="text/css" href="css/icons.css" />
+        <link rel="stylesheet" type="text/css" href="css/af.ui.css" />
+<!--         <script type="text/javascript" src="cordova.js"></script> -->
+
+        <script type="text/javascript" charset="utf-8" src="js/appframework.js"></script>
+        <script type="text/javascript" charset="utf-8" src="ui/appframework.ui.js"></script>
+        
+        <script type="text/javascript">
+            var webRoot = "./";
+            $.ui.autoLaunch = false; //By default, it is set to true and you're app will run right away.  We set it to false to show a splashscreen
+			$.ui.showBackButton=false;
+            /* This function runs when the body is loaded.*/
+            var init = function () {
+                    $.ui.backButtonText = "Back";// We override the back button text to always say "Back"
+                    window.setTimeout(function () {
+                        $.ui.launch();
+                    }, 1500);//We wait .5 seconds to call $.ui.launch after DOMContentLoaded fires
+                };
+            document.addEventListener("DOMContentLoaded", init, false);
+            $.ui.ready(function () {
+                //This function will get executed when $.ui.launch has completed
+            });
+ 		
+         	// Wait for device API libraries to load
+            //
+            function onLoad() {
+                document.addEventListener("deviceready", onDeviceReady, false);
+            }
+
+            // device APIs are available
+            //
+            function onDeviceReady() {
+                // Register the event listener
+                document.addEventListener("backbutton", onBackKeyDown, false);
+            }
+
+            // Handle the back button
+            //
+            function onBackKeyDown() {
+            	navigator.app.exitApp();
+            }
+        </script>
+        
+        <title>Task Stack</title>
+    </head>
+    <body onload="onLoad()">
+	    <div id="afui" class="android"> <!-- this is the main container div.  This way, you can have only part of your app use UI -->
+	    	<div id="content">
+	    	
+	    	</div>
+	    </div>
+        
+<!--         <script type="text/javascript" src="phonegap.js"></script> -->
+        
+    </body>
+</html>
